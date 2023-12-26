@@ -42,14 +42,11 @@ function AccordionItem({ title, text, num }) {
   }
 
   return (
-    <div className={`item ${isOpen ? "open" : ""}`} onClick={handleToggle}>
-      <h1 className="number">{num}</h1>
-      <h1 className="title" style={{ display: !isOpen ? "block" : "none" }}>
-        {title} +
-      </h1>
-      <h1 className="text" style={{ display: isOpen ? "block" : "none" }}>
-        {text}
-      </h1>
+    <div className="item" onClick={handleToggle}>
+      <h1 className="number">{num < 9 ? `0${num + 1}` : num + 1}</h1>
+      <h1 className="title">{title}</h1>
+      <h1 className="icon">{isOpen ? "-" : "+"}</h1>
+      {isOpen && <div className="content-box">{text}</div>}
     </div>
   );
 }
