@@ -20,10 +20,26 @@ export default function App() {
   return (
     <div>
       <Accordion />
+      <AccordionItem />
     </div>
   );
 }
 
 function Accordion() {
   return <div>TODO HIIIIII</div>;
+}
+
+function AccordionItem() {
+  return (
+    <div className="accordion">
+      {faqs.map((faq, index) => (
+        <div className="item" key={index}>
+          <ul>
+            <title>{faq.title}</title>
+            <li>{faq.text}</li>
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
 }
