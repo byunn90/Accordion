@@ -1,5 +1,5 @@
 import "./index.css";
-// import { useState } from "react";
+import { useState } from "react";
 
 const faqs = [
   {
@@ -19,27 +19,37 @@ const faqs = [
 export default function App() {
   return (
     <div>
-      <Accordion />
-      <AccordionItem />
+      <Accordion data={faqs} />
     </div>
   );
 }
 
-function Accordion() {
-  return <div>TODO HIIIIII</div>;
-}
-
-function AccordionItem() {
+function Accordion({ data }) {
   return (
     <div className="accordion">
-      {faqs.map((faq, index) => (
-        <div className="item" key={index}>
-          <ul>
-            <title>{faq.title}</title>
-            <li>{faq.text}</li>
-          </ul>
-        </div>
+      {data.map((el, i) => (
+        <AccordionItem title={el.title} text={el.text} num={i} key={el.title} />
       ))}
+    </div>
+  );
+}
+
+function AccordionItem({ title, text, num }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleToggle() {
+    setIsOpen((isOpen) => !isOpen);
+  }
+
+  return (
+    <div className={`item ${isOpen ? "open" : ""}`} onClick={handleToggle}>
+      <h1 className="number">{num}</h1>
+      <h1 className="title" style={{ display: !isOpen ? "block" : "none" }}>
+        {title} +
+      </h1>
+      <h1 className="text" style={{ display: isOpen ? "block" : "none" }}>
+        {text}
+      </h1>
     </div>
   );
 }
