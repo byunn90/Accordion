@@ -14,6 +14,10 @@ const faqs = [
     title: "Do you ship to countries outside the EU?",
     text: "Excepturi velit laborum, perspiciatis nemo perferendis reiciendis aliquam possimus dolor sed! Dolore laborum ducimus veritatis facere molestias!",
   },
+  {
+    title: "This Is React",
+    text: "React was created by FaceBook in 2013",
+  },
 ];
 
 export default function App() {
@@ -25,20 +29,27 @@ export default function App() {
 }
 
 function Accordion({ data }) {
+  const [curOpen, setIsOpen] = useState(0);
   return (
     <div className="accordion">
       {data.map((el, i) => (
-        <AccordionItem title={el.title} text={el.text} num={i} key={el.title} />
+        <AccordionItem
+          curOpen={curOpen}
+          onOpen={setIsOpen}
+          title={el.title}
+          text={el.text}
+          num={i}
+          key={el.title}
+        />
       ))}
     </div>
   );
 }
 
-function AccordionItem({ title, text, num }) {
-  const [isOpen, setIsOpen] = useState(false);
-
+function AccordionItem({ title, text, num, curOpen, onOpen }) {
+  const isOpen = num === curOpen;
   function handleToggle() {
-    setIsOpen((isOpen) => !isOpen);
+    // setIsOpen((isOpen) => !isOpen);
   }
 
   return (
